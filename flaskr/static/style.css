@@ -93,6 +93,15 @@ header .action {
     background: #FFC49F;
 }
 
+.post {
+    background: linear-gradient(45deg, #f6e9e3, #f1ddda);
+    border: 1.5px solid #C5A5B0;
+    text-indent: 1%;
+    border-style: dashed;
+    border-radius: 25px;
+    box-shadow: 1px 1px 3px 3px rgb(165, 164, 164) ;
+}
+
 .post>header {
     display: flex;
     align-items: flex-end;
@@ -115,6 +124,7 @@ header .action {
 
 .post .body {
     white-space: pre-line;
+    /* background-color: black; */
 }
 
 .content:last-child {
@@ -145,13 +155,13 @@ header .action {
 }
 
 input.danger {
-    color: #cc2f2e;
+    color: #6e5a61;
 }
 
 input[type=submit] {
     align-self: start;
     min-width: 10em;
-    background-color: #f3ddd9;
+    background-color: #f4d2cb;
 }
 
 footer {
@@ -173,3 +183,4 @@ footer {
     margin: 0;
     padding: 0;
   }
+
