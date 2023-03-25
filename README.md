@@ -1,3 +1,4 @@
+![huddleUp](https://imgur.com/Pms8VPU)
 # HuddleUp
 Expand you bubble, join our huddle!
 ## What is HuddleUp?
