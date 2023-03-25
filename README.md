@@ -5,7 +5,10 @@ HuddleUp is a web application that allows users to post about activities they wo
 ## How to use HuddleUp
 Simply create a profile entering a username, password, and contact information to access your feed.  This login allows you to create a post, check others posts in your feed, and join events based on your interests.  You can also use the tabs by your feed to filter posts based on what type of activities you would like to join.
 ## Contributors
-Nhu
-Rachel
-Emma
-Alex
+Nhu @nhunguyen7
+
+Rachel @racheljayi
+
+Emma @etmrmia
+
+Alex @amb10
