@@ -1,4 +1,5 @@
 # HuddleUp
+![Alt text](relative%20Downloads/Untitled_Artwork.heic?raw=true "Title")
 Expand you bubble, join our huddle!
 ## What is HuddleUp?
 HuddleUp is a web application using Flask with Python, HTML, and CSS that allows users to post about activities they would like to find a group of people for or join activities they wish to try.  Perfect for college campuses such as the University of Pittsburgh, HuddleUp allows users to create and view events in their area and meet new people with similar interests.
