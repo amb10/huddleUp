@@ -16,6 +16,5 @@ CREATE TABLE post (
   tag TEXT NOT NULL, 
   location TEXT NOT NULL,
   time TEXT NOT NULL,
-  joins INTEGER NOT NULL,
   FOREIGN KEY (author_id) REFERENCES user (id)
 );

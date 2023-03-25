@@ -10,6 +10,12 @@
     <input name="title" id="title" value="{{ request.form['title'] or post['title'] }}" required>
     <label for="body">Body</label>
     <textarea name="body" id="body">{{ request.form['body'] or post['body'] }}</textarea>
+    <label for="tag">Tag</label>
+    <textarea name="tag" id="tag">{{ request.form['tag'] or post['tag'] }}</textarea>
+    <label for="location">Location</label>
+    <input name="location" id="location" value="{{ request.form['location'] or post['location'] }}" required>
+    <label for="time">Time</label>
+    <input name="time" id="time" value="{{ request.form['time']or post['time'] }}" required>
     <input type="submit" value="Save">
 </form>
 <hr>
