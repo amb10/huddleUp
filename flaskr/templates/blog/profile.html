@@ -3,8 +3,8 @@
 {% block header %}
 <header>
     <h1>{{ user['username'] }}</h1>
-    {% if g.user['id'] == user['id'] %}
-    <p>user's profile</p>
+    {% if g.user['username'] == user['username'] %}
+    <a href="{{ url_for('blog.p_update', id=g.user['id']) }}">Edit Profile</a>
     {% endif %}
 </header>
 {% endblock %}

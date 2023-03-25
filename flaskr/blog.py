@@ -2,6 +2,7 @@ from flask import (
     Blueprint, flash, g, redirect, render_template, request, url_for
 )
 from werkzeug.exceptions import abort
+from werkzeug.security import check_password_hash, generate_password_hash
 
 from flaskr.auth import login_required
 from flaskr.db import get_db
@@ -24,6 +25,49 @@ def index():
 def profile(id):
     user = get_user(id)
     return render_template('blog/profile.html', user=user)
+
+
+@bp.route('/<int:id>/p_update', methods=('GET', 'POST'))
+@login_required
+def p_update(id, check_author=True):
+    user = get_user(id)
+    if check_author and user['id'] != g.user['id']:
+        abort(403)
+
+    if request.method == 'POST':
+        password = request.form['password']
+        first_name = request.form['first_name']
+        last_name = request.form['last_name']
+        phone_num = request.form['phone_num']
+        email = request.form['email']
+        error = None
+
+        if not password:
+            error = 'Password is required.'
+        elif not first_name:
+            error = 'First name is required.'
+        elif not last_name:
+            error = 'Last name is required.'
+        elif not phone_num:
+            error = 'Phone number is required.'
+        elif not email:
+            error = 'Email is required.'
+
+        if error is not None:
+            flash(error)
+        else:
+            db = get_db()
+            db.execute(
+                'UPDATE user SET password = ?, first_name = ?, last_name = ?, phone_num = ?, email = ?'
+                ' WHERE id = ?',
+                (generate_password_hash(password), first_name,
+                 last_name, phone_num, email, id)
+            )
+
+            db.commit()
+            return redirect(url_for('blog.profile', id=id))
+
+    return render_template('blog/p_update.html', user=user)
 
 
 @bp.route('/<string:filter_name>', methods=('GET', 'POST'))

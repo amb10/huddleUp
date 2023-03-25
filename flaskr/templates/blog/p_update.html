@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block header %}
+<h1>{% block title %}Edit "{{ user['username'] }}"'s profile{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+<form method="post">
+    <label for="password">Password</label>
+    <input type="password" name="password" id="password" value="{{ request.form['password'] or user['password'] }}"
+        required>
+    <label for="first_name">First Name</label>
+    <input name="first_name" id="first_name" value="{{ request.form['first_name'] or user['first_name'] }}" required>
+    <label for="last_name">Last Name</label>
+    <input type="last_name" name="last_name" id="last_name" value="{{ request.form['last_name'] or user['last_name'] }}"
+        required>
+    <label for="phone_num">Phone Number</label>
+    <input type="phone_num" name="phone_num" id="phone_num" value="{{ request.form['phone_num'] or user['phone_num'] }}"
+        required>
+    <label for="email">Email</label>
+    <input name="email" name="email" id="email" value="{{ request.form['email'] or user['email'] }}" required>
+    <input type="submit" value="Save">
+</form>
+<hr>
+{% endblock %}
