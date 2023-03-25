@@ -242,16 +242,16 @@ def join_post(id):
 
     if post['author_id'] == g.user['id']:
         error = "You created this event!"
+    else:
+        # if statement here for user who already joined
+        list_of_joined = joined_id.split(" ")
+        for x in list_of_joined:
+            x.strip()
+            if str(g.user['id']) == x:
+                error = "You already joined this event!"
 
-    # if statement here for user who already joined
-    list_of_joined = joined_id.split(" ")
-    for x in list_of_joined:
-        x.strip()
-        if str(g.user[id]) == x:
-            error = "You already joined this event!"
-
-    if joins == 0:
-        error = "No slots left!"
+        if joins == 0:
+            error = "No slots left!"
 
     if error is not None:
         flash(error)
