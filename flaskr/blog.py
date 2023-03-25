@@ -196,7 +196,7 @@ def join_post(id):
     joined_id = post['joined_id']
     error = None
 
-    if post['author_id'] == str(g.user['id']):
+    if post['author_id'] == g.user['id']:
         error = "You created this event!"
 
     # if statement here for user who already joined
@@ -240,6 +240,6 @@ def view_joined(id):
         if (get_user(x) == 'none'):
             display_list = display_list + "NULL USER\n"
         else:
-            display_list = display_list + str(get_user(x)['username']) + "\n"
-    flash(display_list)
+            display_list = display_list + "<a href=" + str(x) + "/profile>" + str(get_user(x)['username']) + "</a>\n"
+    flash(Markup(display_list))
     return redirect(url_for('blog.index'))
