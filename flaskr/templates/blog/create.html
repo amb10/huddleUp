@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+<script src="multiselect-dropdown.js" ></script>
 
 {% block header %}
 <h1>{% block title %}New Post{% endblock %}</h1>
@@ -11,7 +12,15 @@
     <label for="body">Message</label>
     <textarea name="body" id="body">{{ request.form['body'] }}</textarea>
     <label for="tag">Tag</label>
-    <textarea name="tag" id="tag">{{ request.form['tag'] }}</textarea>
+    <!-- <textarea name="tag" id="tag">{{ request.form['tag'] }}</textarea> -->
+    <select name="tag" id="tag" multiple multiselect-search="true">
+        <option value="Audi">Audi</option>
+        <option value="BMW">BMW</option>
+        <option value="Mercedes">Mercedes</option>
+        <option value="Volvo">Volvo</option>
+        <option value="Lexus">Lexus</option>
+        <option value="Tesla">Tesla</option>
+      </select>
     <label for="location">Location</label>
     <input name="location" id="location" value="{{ request.form['location'] }}" required>
     <label for="date">Date</label>
