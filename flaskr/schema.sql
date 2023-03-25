@@ -19,5 +19,6 @@ CREATE TABLE post (
   date TEXT NOT NULL,
   joins INTEGER NOT NULL,
   joined_id TEXT NOT NULL,
+  tags TEXT NOT NULL;
   FOREIGN KEY (author_id) REFERENCES user (id)
 );

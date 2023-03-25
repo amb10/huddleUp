@@ -20,6 +20,14 @@ def index():
     return render_template('blog/index.html', posts=posts)
 
 
+def get_tagName(index):
+    tagNames = ["None", "Social", "Sports", "Academic",
+                "Food & Drink", "School Club", "Other"]
+    if index > 6:
+        return "None"
+    return tagNames[index]
+
+
 @bp.route('/create', methods=('GET', 'POST'))
 @login_required
 def create():
