@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block header %}
+<header>
+    <h1>{{ user['username'] }}</h1>
+    {% if g.user['id'] == user['id'] %}
+    <p>user's profile</p>
+    {% endif %}
+</header>
+{% endblock %}
+
+{% block content %}
+<div>
+    <h3>Contact Information</h3>
+    <p class="phone_num">{{ user['phone_num'] }}</p>
+    <p class="email">{{ user['email']}}</p>
+</div>
+<hr>
+{% endblock %}

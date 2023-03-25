@@ -20,6 +20,12 @@ def index():
     return render_template('blog/index.html', posts=posts)
 
 
+@bp.route('/<int:id>/profile', methods=('GET', 'POST'))
+def profile(id):
+    user = get_user(id)
+    return render_template('blog/profile.html', user=user)
+
+
 @bp.route('/<string:filter_name>', methods=('GET', 'POST'))
 def filter_post(filter_name):
     filtered_posts = []
@@ -115,7 +121,7 @@ def get_post(id):
 
 def get_user(id):
     user = get_db().execute(
-        'SELECT u.id, username, password'
+        'SELECT u.id, username, password, first_name, last_name, phone_num, email'
         ' FROM user u'
         ' WHERE u.id = ?',
         (id,)
@@ -232,8 +238,8 @@ def view_joined(id):
         x.strip()
         x = int(x)
         if (get_user(x) == 'none'):
-            display_list = display_list + "NULL USER\n" 
-        else: 
+            display_list = display_list + "NULL USER\n"
+        else:
             display_list = display_list + str(get_user(x)['username']) + "\n"
     flash(display_list)
     return redirect(url_for('blog.index'))
