@@ -13,7 +13,7 @@ bp = Blueprint('blog', __name__)
 def index():
     db = get_db()
     posts = db.execute(
-        'SELECT p.id, title, body, tag, location, time, created, author_id, username'
+        'SELECT p.id, title, body, tag, location, time, joins, created, author_id, username'
         ' FROM post p JOIN user u ON p.author_id = u.id'
         ' ORDER BY created DESC'
     ).fetchall()
@@ -29,7 +29,7 @@ def create():
         tag = request.form['tag']
         location = request.form['location']
         time = request.form['time']
-        # group = request.form['group']
+        joins = request.form['joins']
         error = None
 
         if not title:
@@ -40,9 +40,9 @@ def create():
         else:
             db = get_db()
             db.execute(
-                'INSERT INTO post (title, body, tag, location, time, author_id)'
-                ' VALUES (?, ?, ?, ?, ?, ?)',
-                (title, body, tag, location, time, g.user['id'])
+                'INSERT INTO post (title, body, tag, location, time, joins, author_id)'
+                ' VALUES (?, ?, ?, ?, ?, ?, ?)',
+                (title, body, tag, location, time, joins, g.user['id'])
             )
             db.commit()
             return redirect(url_for('blog.index'))
@@ -52,7 +52,7 @@ def create():
 
 def get_post(id, check_author=True):
     post = get_db().execute(
-        'SELECT p.id, title, body, tag, location, time, created, author_id, username'
+        'SELECT p.id, title, body, tag, location, time, joins, created, author_id, username'
         ' FROM post p JOIN user u ON p.author_id = u.id'
         ' WHERE p.id = ?',
         (id,)
@@ -78,7 +78,7 @@ def update(id):
         tag = request.form['tag']
         location = request.form['location']
         time = request.form['time']
-        # group = request.form['group']
+        joins = request.form['joins']
         error = None
 
         if not title:
@@ -89,9 +89,9 @@ def update(id):
         else:
             db = get_db()
             db.execute(
-                'UPDATE post SET title = ?, body = ?, tag = ?, location = ?, time = ?'
+                'UPDATE post SET title = ?, body = ?, tag = ?, location = ?, time = ?, joins = ?'
                 ' WHERE id = ?',
-                (title, body, tag, location, time, id)
+                (title, body, tag, location, time, joins, id)
             )
             db.commit()
             return redirect(url_for('blog.index'))
