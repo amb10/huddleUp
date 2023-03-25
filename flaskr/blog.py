@@ -133,14 +133,14 @@ def join_post(id):
     joined_id = post['joined_id']
     error = None
 
-    if post['author_id'] == g.user['id']:
+    if post['author_id'] == str(g.user['id']):
         error = "You created this event!"
 
     # if statement here for user who already joined
     list_of_joined = joined_id.split(" ")
     for x in list_of_joined:
         x.strip()
-        if str(g.user[id] == x):
+        if str(g.user[id]) == x:
             error = "You already joined this event!"
 
     if joins == 0:
@@ -149,7 +149,7 @@ def join_post(id):
     if error is not None:
         flash(error)
     else:
-        flash(list_of_joined)
+        flash("Successfully joined event!")
         joins -= 1
         joined_id = joined_id + " " + str(g.user['id'])
         db = get_db()
