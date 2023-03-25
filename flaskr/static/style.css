@@ -1,23 +1,58 @@
+* {
+    font-family: "Gill Sans";
+  }
+
+.banner {
+    text-align: left;
+    /* object-fit: cover; */
+    /* max-width: 7%; */
+    padding-left: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    /* padding-right: 200px; */
+    /* margin: 1rem 0; */
+    /* width: 1500px; */
+    /* width: 1000px; */
+    /* margin: 1rem 0; */
+    /* object-fit: cover; */
+}
+
+.penguin {
+    position: relative;
+    text-align: right;
+    bottom: 165px;
+    right: 50px;
+    /* margin: 0px; */
+    /* display: none; */
+    line-height: 0;
+    margin: 0;
+    padding: 0;
+}
+
 html {
     font-family: sans-serif;
-    background: rgb(254, 251, 251);
-    padding: 1rem;
+    /* background: rgb(226, 12, 12); */
+    /* background: linear-gradient(45deg, #CAC6E1, #FFC49F); */
+    background: linear-gradient(45deg, #CAC6E1, #F5AFA4);
+    /* padding: 1rem; */
 }
 
 body {
-    max-width: 960px;
-    margin: 0 auto;
-    background: white;
+    /* max-width: 960px; */
+    /* margin: 0; */
+    /* background: rgb(251, 243, 243); */
+    /* background: linear-gradient(45deg, #F1F0F8, #EFE8E4); */
+    background: linear-gradient(45deg, #D9D7ED, #FAEEE6);
 }
 
 h1 {
-    font-family: serif;
-    color: #377ba8;
-    margin: 1rem 0;
+    /* font-family: Optima; */
+    color: black;
+    /* margin: 1rem 0; */
 }
 
 a {
-    color: #377ba8;
+    color: black;
 }
 
 hr {
@@ -26,7 +61,7 @@ hr {
 }
 
 nav {
-    background: lightgray;
+    background: #C5A5B0;
     display: flex;
     align-items: center;
     padding: 0 0.5rem;
@@ -135,3 +170,23 @@ input[type=submit] {
     align-self: start;
     min-width: 10em;
 }
+
+footer {
+    text-align: center;
+    margin:0;
+    height: 10vh;
+    margin-top: 150px;
+    /* bottom: 9px; */
+    padding-top: 10px;
+    padding-bottom: 0px;
+    position: relative;
+    background-color: #C5A5B0;
+    color: white;
+    overflow: auto;
+    font-size: medium;
+  }
+
+  footer p{
+    margin: 0;
+    padding: 0;
+  }
