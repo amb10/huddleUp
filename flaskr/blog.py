@@ -13,7 +13,7 @@ bp = Blueprint('blog', __name__)
 def index():
     db = get_db()
     posts = db.execute(
-        'SELECT p.id, title, body, tag, location, time, joins, created, author_id, username'
+        'SELECT p.id, title, body, tag, location, time, date, joins, joined_id, created, author_id, username'
         ' FROM post p JOIN user u ON p.author_id = u.id'
         ' ORDER BY created DESC'
     ).fetchall()
@@ -29,6 +29,7 @@ def create():
         tag = request.form['tag']
         location = request.form['location']
         time = request.form['time']
+        date = request.form['date']
         joins = request.form['joins']
         joined_id = str(g.user['id'])
         error = None
@@ -41,9 +42,9 @@ def create():
         else:
             db = get_db()
             db.execute(
-                'INSERT INTO post (title, body, tag, location, time, joins, joined_id, author_id)'
-                ' VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
-                (title, body, tag, location, time,
+                'INSERT INTO post (title, body, tag, location, time, date, joins, joined_id, author_id)'
+                ' VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
+                (title, body, tag, location, time, date,
                  joins, joined_id, g.user['id'])
             )
             db.commit()
@@ -54,7 +55,7 @@ def create():
 
 def get_post(id):
     post = get_db().execute(
-        'SELECT p.id, title, body, tag, location, time, joins, created, author_id, username'
+        'SELECT p.id, title, body, tag, location, time, date, joins, joined_id, created, author_id, username'
         ' FROM post p JOIN user u ON p.author_id = u.id'
         ' WHERE p.id = ?',
         (id,)
@@ -103,6 +104,7 @@ def update(id, check_author=True):
         tag = request.form['tag']
         location = request.form['location']
         time = request.form['time']
+        date = request.form['date']
         joins = request.form['joins']
         error = None
 
@@ -114,7 +116,7 @@ def update(id, check_author=True):
         else:
             db = get_db()
             db.execute(
-                'UPDATE post SET title = ?, body = ?, tag = ?, joins = ?, location = ?, time = ?'
+                'UPDATE post SET title = ?, body = ?, tag = ?, joins = ?, location = ?, time = ?, date = ?'
                 ' WHERE id = ?',
                 (title, body, tag, joins, location, time, id)
             )

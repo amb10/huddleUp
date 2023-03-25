@@ -14,9 +14,11 @@
     <textarea name="tag" id="tag">{{ request.form['tag'] }}</textarea>
     <label for="location">Location</label>
     <input name="location" id="location" value="{{ request.form['location'] }}" required>
+    <label for="date">Date</label>
+    <input type="date" name="date" id="date" value="{{ request.form['date'] }}" required>
     <label for="time">Time</label>
-    <input name="time" id="time" value="{{ request.form['time'] }}" required>
-    <input type="datetime-local" value="{{ request.form['time'] }}" min="2018-06-07T00:00">
+    <input type="time" name="time" id="time" value="{{ request.form['time'] }}" required>
+    <!-- <input name="time" id="time" value="{{ request.form['time'] }}" required> -->
     <label for="joins">Maximum Group Size</label>
     <input name="joins" id="joins" value="{{ request.form['joins'] }}" required>
     <input type="submit" value="Save">

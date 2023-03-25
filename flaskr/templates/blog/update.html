@@ -15,7 +15,11 @@
     <label for="location">Location</label>
     <input name="location" id="location" value="{{ request.form['location'] or post['location'] }}" required>
     <label for="time">Time</label>
-    <input name="time" id="time" value="{{ request.form['time'] or post['time'] }}" required>
+    <!-- <input name="time" id="time" value="{{ request.form['time'] or post['time'] }}" required> -->
+    <input type="time" name="time" id="time" value="{{ request.form['time'] or post['time'] }}" required>
+    <input type="date" name="date" id="date" value="{{ request.form['date'] or post['date'] }}" required>
+    <!-- <input type="date-local" name="time" id="time" value="{{ request.form['time'] or post['time'] }}" required> -->
+    <!-- <input name="time" type="datetime-local" id="time" value="{{ request.form['time'] }}" min="2023-03-025T00:00" -->
     <label for="joins">Maximum Group Size</label>
     <input name="joins" id="joins" value="{{ request.form['joins'] or post['joins']}}" required>
     <input type="submit" value="Save">
