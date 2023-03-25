@@ -284,6 +284,7 @@ def view_joined(id):
         if (get_user(x) == 'none'):
             display_list = display_list + "NULL USER\n"
         else:
-            display_list = display_list + "<a href=" + str(x) + "/profile>" + str(get_user(x)['username']) + "</a>\n"
+            display_list = display_list + "<a href=" + \
+                str(x) + "/profile>" + str(get_user(x)['username']) + "</a>\n"
     flash(Markup(display_list))
     return redirect(url_for('blog.index'))
