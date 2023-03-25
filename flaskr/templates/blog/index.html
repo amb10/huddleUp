@@ -20,11 +20,11 @@
         <a class="action" href="{{ url_for('blog.update', id=post['id']) }}">Edit</a>
         {% endif %}
     </header>
-    <p class="tag">{{ post['tag']}}</p>
-    <p class="location"> {{ post['location']}}</p>
-    <p class="time">{{ post['time']}}</p>
-    <p class="time">{{ post['date']}}</p>
-    <p class="body">{{ post['body'] }}</p>
+    <p class="tag" style="color: rgb(185, 128, 185);">#{{ post['tag']}}</p>
+    <p class="location">Location: {{ post['location']}}</p>
+    <p class="time">Time: {{ post['time']}}</p>
+    <p class="time">Date: {{ post['date']}}</p>
+    <p class="body">Information: {{ post['body'] }}</p>
     <p class="joins">{{ post['joins']}}</p>
     <form action="{{ url_for('blog.join_post', id=post['id']) }}" method="post">
         <input class="danger" type="submit" value="Join Event" onclick="return confirm('Are you sure?');">
