@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-<script src="multiselect-dropdown.js" ></script>
+<script src="multiselect-dropdown.js"></script>
 
 {% block header %}
 <h1>{% block title %}New Post{% endblock %}</h1>
@@ -7,28 +7,28 @@
 
 {% block content %}
 <form method="post">
-    <label for="title">Title</label>
-    <input name="title" id="title" value="{{ request.form['title'] }}" required>
-    <label for="body">Message</label>
-    <textarea name="body" id="body">{{ request.form['body'] }}</textarea>
-    <label for="tag">Tag</label>
-    <select name="tag" id="tag" multiple multiselect-search="true">
-        <option value="Social">Social</option>
-        <option value="Sports">Sports</option>
-        <option value="Academic">Academic</option>
-        <option value="Food">Food & Drink</option>
-        <option value="Club">School Club</option>
-        <option value="Other">Other</option>
-      </select>
-    <label for="location">Location</label>
-    <input name="location" id="location" value="{{ request.form['location'] }}" required>
-    <label for="date">Date</label>
-    <input type="date" name="date" id="date" value="{{ request.form['date'] }}" required>
-    <label for="time">Time</label>
-    <input type="time" name="time" id="time" value="{{ request.form['time'] }}" required>
-    <!-- <input name="time" id="time" value="{{ request.form['time'] }}" required> -->
-    <label for="joins">Maximum Group Size</label>
-    <input name="joins" id="joins" value="{{ request.form['joins'] }}" required>
-    <input type="submit" value="Save">
+  <label for="title">Title</label>
+  <input name="title" id="title" value="{{ request.form['title'] }}" required>
+  <label for="body">Message</label>
+  <textarea name="body" id="body">{{ request.form['body'] }}</textarea>
+  <label for="tag">Tag</label>
+  <select name="tag" id="tag" multiple multiselect-search="true">
+    <option value="Social">Social</option>
+    <option value="Sports">Sports</option>
+    <option value="Academic">Academic</option>
+    <option value="Food">Food & Drink</option>
+    <option value="Club">School Club</option>
+    <option value="Other">Other</option>
+  </select>
+  <label for="location">Location</label>
+  <input name="location" id="location" value="{{ request.form['location'] }}" required>
+  <label for="date">Date</label>
+  <input type="date" name="date" id="date" value="{{ request.form['date'] }}" required>
+  <label for="time">Time</label>
+  <input type="time" name="time" id="time" value="{{ request.form['time'] }}" required>
+  <!-- <input name="time" id="time" value="{{ request.form['time'] }}" required> -->
+  <label for="joins">Maximum Group Size</label>
+  <input name="joins" id="joins" value="{{ request.form['joins'] }}" required>
+  <input type="submit" value="Save">
 </form>
 {% endblock %}
