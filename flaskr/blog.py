@@ -34,7 +34,10 @@ def create():
     if request.method == 'POST':
         title = request.form['title']
         body = request.form['body']
-        tag = request.form['tag']
+        tag_list = request.form.getlist('tag')
+        tag = ""
+        for x in tag_list:
+            tag = tag + " " + x
         location = request.form['location']
         time = request.form['time']
         date = request.form['date']
@@ -75,30 +78,6 @@ def get_post(id):
     return post
 
 
-@bp.route('/<int:id>/join', methods=('GET', 'POST'))
-@login_required
-def join_post(id, check_author=False):
-    post = get_post(id)
-    error = None
-
-    # post doesn't exist
-    if post is None:
-        abort(404, f"Post id {id} doesn't exist.")
-
-    # author is the same as user (can't join your own post)
-    if check_author and post['author_id'] == g.user['id']:
-        abort(403)
-
-    db = get_db()
-    db.execute(
-        'UPDATE post SET joins -= 1'
-        'SELECT CONCAT(joined_id, " ", str(g.user["id"]))'
-        ' WHERE id = ?'
-    )
-    db.commit()
-    return redirect(url_for('blog.join'))
-
-
 @bp.route('/<int:id>/update', methods=('GET', 'POST'))
 @login_required
 def update(id, check_author=True):
@@ -109,7 +88,10 @@ def update(id, check_author=True):
     if request.method == 'POST':
         title = request.form['title']
         body = request.form['body']
-        tag = request.form['tag']
+        tag_list = request.form.getlist('tag')
+        tag = ""
+        for x in tag_list:
+            tag = tag + " " + x        
         location = request.form['location']
         time = request.form['time']
         date = request.form['date']
@@ -148,3 +130,49 @@ def delete(id):
     db.execute('DELETE FROM post WHERE id = ?', (id,))
     db.commit()
     return redirect(url_for('blog.index'))
+
+
+@bp.route('/<int:id>/join_post', methods=('POST',))
+@login_required
+def join_post(id):
+    post = get_post(id)
+
+    joins = post['joins']
+    joined_id = post['joined_id']
+    error = None
+
+    if post['author_id'] == g.user['id']:
+        error = "You created this event!"
+
+    # if statement here for user who already joined
+    list_of_joined = joined_id.split(" ")
+    for x in list_of_joined:
+        x.strip()
+        if str(g.user[id] == x):
+            error = "You already joined this event!"
+
+    if joins == 0:
+        error = "No slots left!"
+        
+    if error is not None:
+        flash(error)
+    else:
+        flash(list_of_joined)
+        joins -= 1
+        joined_id = joined_id + " " + str(g.user['id'])
+        db = get_db()
+        db.execute(
+                'UPDATE post SET joins = ?, joined_id = ?'
+                ' WHERE id = ?',
+                (joins, joined_id, id)
+            )
+        db.commit()
+    return redirect(url_for('blog.index'))
+
+"""
+- button for author to press to show list of users who joined
+- split ids
+- user = load from db (like loading posts)
+- user(id)
+
+"""

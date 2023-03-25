@@ -3,16 +3,13 @@
 <title>{% block title %}{% endblock %} - Flaskr</title>
 <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 <body>
-    <!-- <div class="banner"><img src="../static/home1.png" alt="home image" style="width:1400px;height:180px;</div> -->
     <div class="banner"><img src="../static/home2.png" alt="home image"></div>
-    <!-- <p class="penguin"><img src="../static/penguin.png" alt="penguin image" width="150" height="150"></p> -->
-    <!-- <img src="image.jpg" alt="Sunflower" style="float: right; margin-right: 15px;"> -->
     <img src="../static/penguin.png" alt="penguin image" width="150" height="150" style="float:right;position:absolute;text-align:right;bottom:550px;right:80px;"></div>
     <img src="../static/icon.png" alt="icon" width="150" height="150" style="float:left;position:absolute;text-align:left;bottom:550px;left:80px;"></div>
 </body>
 
 <nav>
-    <h1>Feed</h1>
+    <h1><a href="/">Feed</a></h1>
     <ul>
         {% if g.user %}
         <li><span>{{ g.user['username'] }}</span>
