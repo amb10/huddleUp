@@ -20,6 +20,49 @@ def index():
     return render_template('blog/index.html', posts=posts)
 
 
+@bp.route('/<string:filter_name>', methods=('GET', 'POST'))
+def filter_post(filter_name):
+    filtered_posts = []
+    db = get_db()
+    posts = db.execute(
+        'SELECT p.id, title, body, tag, location, time, date, joins, joined_id, created, author_id, username'
+        ' FROM post p JOIN user u ON p.author_id = u.id'
+        ' ORDER BY created DESC'
+    ).fetchall()
+
+    filter_index = 6
+    match filter_name:
+        case "Social":
+            filter_index = 1
+        case "Sports":
+            filter_index = 2
+        case "Academic":
+            filter_index = 3
+        case "Food":
+            filter_index = 4
+        case "Club":
+            filter_index = 5
+        case "Other":
+            filter_index = 6
+
+    for post in posts:
+        if has_filter(post, filter_index, filter_name):
+            filtered_posts.append(post)
+
+    return render_template('blog/filter.html', posts=filtered_posts)
+
+
+def has_filter(post, filter_index, filter_name):
+    tags = post['tag'].split()
+    if len(tags) < filter_index:
+        filter_index = len(tags)
+
+    for i in range(filter_index):
+        if tags[i] == filter_name:
+            return True
+    return False
+
+
 @bp.route('/create', methods=('GET', 'POST'))
 @login_required
 def create():
@@ -83,7 +126,7 @@ def update(id, check_author=True):
         tag_list = request.form.getlist('tag')
         tag = ""
         for x in tag_list:
-            tag = tag + " " + x        
+            tag = tag + " " + x
         location = request.form['location']
         time = request.form['time']
         date = request.form['date']
@@ -145,7 +188,7 @@ def join_post(id):
 
     if joins == 0:
         error = "No slots left!"
-        
+
     if error is not None:
         flash(error)
     else:
@@ -154,12 +197,13 @@ def join_post(id):
         joined_id = joined_id + " " + str(g.user['id'])
         db = get_db()
         db.execute(
-                'UPDATE post SET joins = ?, joined_id = ?'
-                ' WHERE id = ?',
-                (joins, joined_id, id)
-            )
+            'UPDATE post SET joins = ?, joined_id = ?'
+            ' WHERE id = ?',
+            (joins, joined_id, id)
+        )
         db.commit()
     return redirect(url_for('blog.index'))
+
 
 """
 - button for author to press to show list of users who joined
