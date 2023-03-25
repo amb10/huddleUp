@@ -82,17 +82,17 @@ def filter_post(filter_name):
 
     filter_index = 6
     match filter_name:
-        case "Social":
+        case "#Social":
             filter_index = 1
-        case "Sports":
+        case "#Sports":
             filter_index = 2
-        case "Academic":
+        case "#Academic":
             filter_index = 3
-        case "Food":
+        case "#Food":
             filter_index = 4
-        case "Club":
+        case "#Club":
             filter_index = 5
-        case "Other":
+        case "#Other":
             filter_index = 6
 
     for post in posts:
@@ -122,7 +122,7 @@ def create():
         tag_list = request.form.getlist('tag')
         tag = ""
         for x in tag_list:
-            tag = tag + " " + x
+            tag = tag + " #" + x
         location = request.form['location']
         time = request.form['time']
         date = request.form['date']
@@ -190,7 +190,7 @@ def update(id, check_author=True):
         tag_list = request.form.getlist('tag')
         tag = ""
         for x in tag_list:
-            tag = tag + " " + x
+            tag = tag + " #" + x
         location = request.form['location']
         time = request.form['time']
         date = request.form['date']
