@@ -13,7 +13,7 @@ bp = Blueprint('blog', __name__)
 def index():
     db = get_db()
     posts = db.execute(
-        'SELECT p.id, title, body, tag, location, time, joins, created, author_id, username'
+        'SELECT p.id, title, body, tag, location, time, joins, joined_id, created, author_id, username'
         ' FROM post p JOIN user u ON p.author_id = u.id'
         ' ORDER BY created DESC'
     ).fetchall()
@@ -30,6 +30,7 @@ def create():
         location = request.form['location']
         time = request.form['time']
         joins = request.form['joins']
+        joined_id = str(g.user['id'])
         error = None
 
         if not title:
@@ -40,9 +41,9 @@ def create():
         else:
             db = get_db()
             db.execute(
-                'INSERT INTO post (title, body, tag, location, time, joins, author_id)'
-                ' VALUES (?, ?, ?, ?, ?, ?, ?)',
-                (title, body, tag, location, time, joins, g.user['id'])
+                'INSERT INTO post (title, body, tag, location, time, joins, joined_id, author_id)' 
+                ' VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
+                (title, body, tag, location, time, joins, joined_id, g.user['id'])
             )
             db.commit()
             return redirect(url_for('blog.index'))
@@ -52,7 +53,7 @@ def create():
 
 def get_post(id):
     post = get_db().execute(
-        'SELECT p.id, title, body, tag, location, time, joins, created, author_id, username'
+        'SELECT p.id, title, body, tag, location, time, joins, joined_id, created, author_id, username'
         ' FROM post p JOIN user u ON p.author_id = u.id'
         ' WHERE p.id = ?',
         (id,)
@@ -62,6 +63,30 @@ def get_post(id):
         abort(404, f"Post id {id} doesn't exist.")
 
     return post
+
+
+@bp.route('/<int:id>/join', methods=('GET', 'POST'))
+@login_required
+def join_post(id, check_author=False):
+    post = get_post(id)
+    error = None
+
+    #post doesn't exist
+    if post is None:
+        abort(404, f"Post id {id} doesn't exist.")
+
+    #author is the same as user (can't join your own post)
+    if check_author and post['author_id'] == g.user['id']:
+        abort(403)
+
+    db = get_db()
+    db.execute(
+        'UPDATE post SET joins -= 1'
+        'SELECT CONCAT(joined_id, " ", str(g.user["id"]))'
+        ' WHERE id = ?'
+    )
+    db.commit()
+    return redirect(url_for('blog.join'))
 
 
 @bp.route('/<int:id>/update', methods=('GET', 'POST'))

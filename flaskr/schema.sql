@@ -17,5 +17,6 @@ CREATE TABLE post (
   location TEXT NOT NULL,
   time TEXT NOT NULL,
   joins INTEGER NOT NULL,
+  joined_id TEXT NOT NULL,
   FOREIGN KEY (author_id) REFERENCES user (id)
 );
