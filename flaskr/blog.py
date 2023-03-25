@@ -118,7 +118,7 @@ def update(id, check_author=True):
             db.execute(
                 'UPDATE post SET title = ?, body = ?, tag = ?, joins = ?, location = ?, time = ?, date = ?'
                 ' WHERE id = ?',
-                (title, body, tag, joins, location, time, id)
+                (title, body, tag, joins, location, time, date, id)
             )
             db.commit()
             return redirect(url_for('blog.index'))
