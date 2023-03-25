@@ -14,8 +14,8 @@ CREATE TABLE post (
   title TEXT NOT NULL,
   body TEXT NOT NULL,
   tag TEXT NOT NULL, 
-  group INTEGER NOT NULL,
   location TEXT NOT NULL,
   time TEXT NOT NULL,
+  joins INTEGER NOT NULL,
   FOREIGN KEY (author_id) REFERENCES user (id)
 );
