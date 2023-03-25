@@ -20,12 +20,6 @@ def index():
     return render_template('blog/index.html', posts=posts)
 
 
-@bp.route('/<int:id>/post', methods=('GET', 'POST'))
-def post_page():
-    post = get_post(id)
-    return render_template('blog/post.html', post=post)
-
-
 @bp.route('/create', methods=('GET', 'POST'))
 @login_required
 def create():
@@ -103,6 +97,12 @@ def update(id):
             return redirect(url_for('blog.index'))
 
     return render_template('blog/update.html', post=post)
+
+
+@bp.route('/<int:id>/post', methods=('GET', 'POST'))
+def post_page(id):
+    post = get_post(id)
+    return render_template('blog/post.html', post=post)
 
 
 @bp.route('/<int:id>/delete', methods=('POST',))
