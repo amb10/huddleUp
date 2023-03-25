@@ -113,6 +113,20 @@ def get_post(id):
     return post
 
 
+def get_user(id):
+    user = get_db().execute(
+        'SELECT u.id, username, password'
+        ' FROM user u'
+        ' WHERE u.id = ?',
+        (id,)
+    ).fetchone()
+
+    if user is None:
+        return 'none'
+
+    return user
+
+
 @bp.route('/<int:id>/update', methods=('GET', 'POST'))
 @login_required
 def update(id, check_author=True):
@@ -205,10 +219,21 @@ def join_post(id):
     return redirect(url_for('blog.index'))
 
 
-"""
-- button for author to press to show list of users who joined
-- split ids
-- user = load from db (like loading posts)
-- user(id)
+@bp.route('/<int:id>/view_joined', methods=('POST',))
+@login_required
+def view_joined(id):
+    post = get_post(id)
+    joined_id = post['joined_id']
+    display_list = ""
+    error = None
 
-"""
+    list_of_joined = joined_id.split(" ")
+    for x in list_of_joined:
+        x.strip()
+        x = int(x)
+        if (get_user(x) == 'none'):
+            display_list = display_list + "NULL USER\n" 
+        else: 
+            display_list = display_list + str(get_user(x)['username']) + "\n"
+    flash(display_list)
+    return redirect(url_for('blog.index'))
