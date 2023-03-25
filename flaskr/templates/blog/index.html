@@ -24,23 +24,13 @@
         </form>
         {% endif %}
     </header>
-<<<<<<< HEAD
     <p class="tag" style="color: rgb(185, 128, 185); padding-left: 10px;">#{{ post['tag']}}</p>
-    <p class="location" style="padding-left: 10px;">Location: {{ post['location']}}</p>
-    <p class="time" style="padding-left: 10px;">Time: {{ post['time']}}</p>
-    <p class="time" style="padding-left: 10px;">Date: {{ post['date']}}</p>
-    <p class="body" style="padding-left: 10px; padding-right: 10px;">Information: {{ post['body'] }}</p>
-    <p class="joins" style="padding-left: 10px;">{{ post['joins']}}</p>
+    <p class="location" style="padding-left: 10px;"><b>Location:</b> {{ post['location']}}</p>
+    <p class="time" style="padding-left: 10px;"><b>Time:</b> {{ post['time']}}</p>
+    <p class="time" style="padding-left: 10px;"><b>Date:</b> {{ post['date']}}</p>
+    <p class="body" style="padding-left: 10px; padding-right: 10px;"><b>Information:</b> {{ post['body'] }}</p>
+    <p class="joins" style="padding-left: 10px;"><b>Slots left: </b>{{ post['joins']}}</p>
     <form action="{{ url_for('blog.join_post', id=post['id']) }}" method="post" style="padding-left: 10px;">
-=======
-    <p class="tag" style="color: rgb(185, 128, 185);">{{ post['tag']}}</p>
-    <p class="location">Location: {{ post['location']}}</p>
-    <p class="time">Time: {{ post['time']}}</p>
-    <p class="time">Date: {{ post['date']}}</p>
-    <p class="body">Information: {{ post['body'] }}</p>
-    <p class="joins">{{ post['joins']}}</p>
-    <form action="{{ url_for('blog.join_post', id=post['id']) }}" method="post">
->>>>>>> 44374e251ed6f39c23055d590ad34918529391d0
         <input class="danger" type="submit" value="Join Event" onclick="return confirm('Are you sure?');">
     </form>
 </article>
