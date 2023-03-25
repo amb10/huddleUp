@@ -2,22 +2,37 @@
 
 {% block header %}
 <header>
-    <h1>{{ post['title'] }}</h1>
-    <div class="about">by {{ post['username'] }} on {{ post['created'].strftime('%Y-%m-%d') }}</div>
-    {% if g.user['id'] == post['author_id'] %}
-    <a class="action" href="{{ url_for('blog.update', id=post['id']) }}">Edit</a>
-    {% endif %}
+    <div style="padding-top: 0%;">
+        <h1 style="text-indent:2%">{{ post['title'] }}</h1>
+        <div class="about" style="text-indent:3%">by {{ post['username'] }} on {{ post['created'].strftime('%Y-%m-%d')
+            }}</div>
+        {% if g.user['id'] == post['author_id'] %}
+        <div style="display:flex; flex-direction: row; justify-content: center; align-items: center">
+
+            <a class="action" style="margin-bottom: 0px;" href="{{ url_for('blog.update', id=post['id']) }}">Edit</a>
+            <form action="{{ url_for('blog.view_joined', id=post['id']) }}" method="post">
+                <button class="attendees" type="submit"
+                    style="margin-bottom:0px; margin-top:0px; background-color: rgb(224, 220, 220); border-radius: 5px;">View
+                    Attendees</button>
+            </form>
+        </div>
+        {% endif %}
+
+    </div>
 </header>
 {% endblock %}
 
 {% block content %}
 <article class="post">
-    <p class="tag" style="color: rgb(185, 128, 185);">#{{ post['tag']}}</p>
-    <p class="location">Location: {{ post['location']}}</p>
-    <p class="time">Time: {{ post['time']}}</p>
-    <p class="time">Date: {{ post['date']}}</p>
-    <p class="body">Information: {{ post['body'] }}</p>
-    <p class="joins">Spots left: {{ post['joins']}}</p>
+    <p class="tag" style="color: rgb(185, 128, 185); padding-left: 10px;">{{ post['tag']}}</p>
+    <p class="location" style="padding-left: 10px;"><b>Location:</b> {{ post['location']}}</p>
+    <p class="time" style="padding-left: 10px;"><b>Time:</b> {{ post['time']}}</p>
+    <p class="time" style="padding-left: 10px;"><b>Date:</b> {{ post['date']}}</p>
+    <p class="body" style="padding-left: 10px; padding-right: 10px;"><b>Information:</b> {{ post['body'] }}</p>
+    <p class="joins" style="padding-left: 10px;"><b>Slots left: </b>{{ post['joins']}}</p>
+    <form action="{{ url_for('blog.join_post', id=post['id']) }}" method="post" style="padding-left: 10px;">
+        <input class="danger" type="submit" value="Join Event" onclick="return confirm('Are you sure?');">
+    </form>
 </article>
 <hr>
 {% endblock %}

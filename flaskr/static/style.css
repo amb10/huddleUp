@@ -108,10 +108,12 @@ header .action {
     display: flex;
     align-items: flex-end;
     font-size: 0.85em;
+    /* background-color: black; */
 }
 
 .post>header>div:first-of-type {
     flex: auto;
+    /* background-color: black; */
 }
 
 .post>header h1 {
